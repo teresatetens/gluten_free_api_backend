@@ -36,11 +36,30 @@ exports.find_user = (req, res) => {
 // }
 
 //userRouter.put('/watchlist', userController.update_user_watchlist)
-exports.update_user_watchlist = (req, res) => {
-    const { id, place_id } = req.body
-    User.findByIdAndUpdate(id,{ $push: { watch_list: place_id }})
-        .then(data => res.json(data))
-        .catch(err => console.error(err.message))
+exports.update_user_watchlist = async (req, res) => {
+    const { user, selected } = req.body
+
+    let targetPlace = await Place.findOne({google_place_id: selected.place_id })
+
+    if (!targetPlace) {
+        targetPlace = new Place({
+            "review": [],
+            "place_name": selected.name,
+            "lat": selected.geometry.location.lat,
+            "lng": selected.geometry.location.lng,
+            "address": selected.vicinity,
+            "is_supermarket": false,
+            "is_restaurant": true,
+            "gluten": true,
+            "lactose": false,
+            "fructose": false,
+            "google_place_id": selected.place_id
+          })
+         await targetPlace.save({targetPlace})
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(user, { $push: { watch_list: targetPlace._id }}, { new: true }).populate('watch_list')
+    res.status(200).send(updatedUser)
 }
 
 exports.update_user_review = (req, res) => {
