@@ -1,0 +1,88 @@
+GET http://localhost:3000/
+
+
+###
+
+POST http://localhost:3000/user 
+Content-Type: application/json
+
+{
+    "first_name": "Clara",
+    "last_name": "Boyer",
+    "email": "Clara.Boyer@hotmail.com",
+    "username": "Clara.Boyer",
+    "password": "baU2sdWgcnLpw0r",
+    "gluten": "true",
+    "lactose": "false",
+    "fructose": "false",
+    "review": [],
+    "watch_list":[]
+}
+
+###
+
+PUT http://localhost:3000/place
+Content-Type: application/json
+
+{
+"id": "5fc66362631263b73c144a00", 
+"review_id": "5fc67310acbdbe59bc3415af"
+}
+
+###
+
+POST http://localhost:3000/place
+Content-Type: application/json
+
+
+  {
+    "review": [],
+    "place_name": "Gandarias",
+    "lat": 43.3240228,
+    "lng": -1.9857835,
+    "address": "31 de Agosto Kalea, nº 23, Donostia",
+    "is_supermarket": false,
+    "is_restaurant": true,
+    "gluten": true,
+    "lactose": false,
+    "fructose": false,
+    "google_place_id": "ChIJtR9nSkylUQ0RqDxIyuEHftw"
+  }
+
+
+###
+PUT http://localhost:3000/user/review
+Content-Type: application/json
+
+{
+"id": "5fc659aa5f8c347e8d4aa2f1", 
+"review_id": "5fc67398acbdbe59bc3415bd"
+}
+
+###
+PUT http://localhost:3000/user/watchlist
+Content-Type: application/json
+
+{
+"id": "5fc65265b7e8a3ccd1d60ff4", 
+"place_id": "5fc6634d631263b73c1449ff"
+}
+###
+GET http://localhost:3000/place
+
+###
+GET http://localhost:3000/place/5fc6637e631263b73c144a02
+
+
+###
+GET http://localhost:3000/user
+
+###
+GET http://localhost:3000/user/5fc65265b7e8a3ccd1d60ff4
+
+###
+GET http://localhost:3000/review
+
+
+###
+GET http://localhost:3000/review/5fc66b8cacbdbe59bc3415a3
