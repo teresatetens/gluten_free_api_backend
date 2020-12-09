@@ -13,6 +13,7 @@ const reviewRouter = require('./routes/review');
 const mapRouter = require('./routes/map');
 
 const app = express();
+app.disable('etag');
 
 app.use(cors())
 app.use(logger('common'));

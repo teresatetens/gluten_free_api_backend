@@ -62,6 +62,15 @@ exports.update_user_watchlist = async (req, res) => {
     res.status(200).send(updatedUser)
 }
 
+exports.delete_user_watchlist = async (req, res) => {
+    const { user, google_place_id } = req.body
+
+    let targetPlace = await Place.findOne({ google_place_id })
+
+    const updatedUser = await User.findByIdAndUpdate(user, { $pull: { watch_list: targetPlace._id }}, { new: true }).populate('watch_list')
+    res.status(200).send(updatedUser)
+}
+
 exports.update_user_review = (req, res) => {
     const { id, review_id } = req.body
     User.findByIdAndUpdate(id,{ $push: { review: review_id }})
